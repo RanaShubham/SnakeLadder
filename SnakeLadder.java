@@ -11,22 +11,28 @@ public class SnakeLadder {
 	{
 		System.out.println("Welcome to snake and ladder program");
 		
-		die = (int)Math.floor(Math.random()*7);
-		turn = (int)Math.floor(Math.random()*3);
-		
-		switch(turn)
-			{
-				case 0: System.out.println("No play");
-						break;
-				case 1: ladder();
-						break;
-				case 2: snake();
-						break;
-			}
+		while (true)
+		{
+			if (currentPosition > 100)
+				break;
+			
+			die = (int)Math.floor(Math.random()*7);
+			turn = (int)Math.floor(Math.random()*3);
+			switch(turn)
+				{
+					case 0: System.out.println(currentPosition);
+							break;
+					case 1: ladder();
+							break;
+					case 2: snake();
+							break;
+				}
+		}
 	}
 
 	private static void snake() 
 	{
+		if (currentPosition-die >= 0)
 		currentPosition = currentPosition - die ;
 	}
 
