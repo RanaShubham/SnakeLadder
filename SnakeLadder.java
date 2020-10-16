@@ -13,20 +13,21 @@ public class SnakeLadder {
 		
 		while (true)
 		{
-			if (currentPosition > 100)
-				break;
-			
 			die = (int)Math.floor(Math.random()*7);
 			turn = (int)Math.floor(Math.random()*3);
 			switch(turn)
 				{
-					case 0: System.out.println(currentPosition);
-							break;
+					case 0: break;
 					case 1: ladder();
 							break;
 					case 2: snake();
 							break;
 				}
+			
+			if (currentPosition == 100) {
+				System.out.println("Player has reached postion "+currentPosition);
+				break;
+			}
 		}
 	}
 
@@ -38,6 +39,7 @@ public class SnakeLadder {
 
 	private static void ladder() 
 	{
+		if (currentPosition + die <= 100)
 		currentPosition = currentPosition + die;
 	}
 
