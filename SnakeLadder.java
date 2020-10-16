@@ -2,49 +2,84 @@ package SnakeAndLadder;
 
 public class SnakeLadder {	
 	
+	//constants
+	 static final int MAX_POS = 100;
+	 static final int MIN_POS = 0;
+	 static int player1_pos;
+	 static int player2_pos;
+	 
 	//Variables
-	static int die = 0;
-	static int currentPosition =0;
-	static int turn = 0;
-	static int dieRolls = 0;
+	 static int die = 0;
+	 int currentPosition = 0;
+	 int turn = 1;
+	 int dieRolls = 0;
 	
 	public static void main(String[] args) 
 	{
 		System.out.println("Welcome to snake and ladder program");
 		
-		while (true)
+		SnakeLadder player1 = new SnakeLadder();
+		SnakeLadder player2 = new SnakeLadder();
+
+		while(true)
 		{
-			die = (int)Math.floor(Math.random()*7);
-			++dieRolls;
-			turn = (int)Math.floor(Math.random()*3);
-			switch(turn)
-				{
-					case 0: break;
-					case 1: ladder();
-							break;
-					case 2: snake();
-							break;
-				}
+			 player1_pos = player1.movePlayer();
+			 player2_pos = player2.movePlayer();
 			
-			System.out.println("Current position is: "+ currentPosition);
-			if (currentPosition == 100) {
-				System.out.println("Player has reached postion "+currentPosition+" in "+dieRolls+" die rolls");
+			if (player1_pos == 100)
+			{
+				System.out.println("Player 1 won with "+player1.dieRolls+" rolls");
 				break;
 			}
-			
+			if (player2_pos == 100)
+			{
+				System.out.println("Player 2 won with "+player2.dieRolls+" rolls");
+				break;
+			}
 		}
 	}
 
-	private static void snake() 
+	//To move players
+	private int movePlayer()
 	{
-		if (currentPosition-die >= 0)
-		currentPosition = currentPosition - die ;
+		while (true)
+		{			
+			die = (int)Math.floor(Math.random()*7);
+			this.dieRolls = this.dieRolls + 1;
+			this.turn = (int)Math.floor(Math.random()*3);
+			switch(turn)
+				{
+					case 0: break;
+					case 1: ladder(this);
+							break;
+					case 2: snake(this);
+							break;
+				}
+						
+			if (this.currentPosition == MAX_POS) 
+				{
+					return 100;
+				}
+			
+			if(this.turn != 1)
+				break;
+			
+		}
+		return 0;
 	}
-
-	private static void ladder() 
+	
+	//backward move for players
+	private void snake(SnakeLadder obj) 
 	{
-		if (currentPosition + die <= 100)
-		currentPosition = currentPosition + die;
+		if (obj.currentPosition - die >= MIN_POS)
+		obj.currentPosition = obj.currentPosition - die ;
+	}
+	
+	//Forward move for players
+	private void ladder(SnakeLadder obj) 
+	{
+		if (obj.currentPosition + die <= MAX_POS)
+		obj.currentPosition = obj.currentPosition + die;
 	}
 
 }
