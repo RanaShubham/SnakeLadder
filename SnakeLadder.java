@@ -6,6 +6,7 @@ public class SnakeLadder {
 	static int die = 0;
 	static int currentPosition =0;
 	static int turn = 0;
+	static int dieRolls = 0;
 	
 	public static void main(String[] args) 
 	{
@@ -14,6 +15,7 @@ public class SnakeLadder {
 		while (true)
 		{
 			die = (int)Math.floor(Math.random()*7);
+			++dieRolls;
 			turn = (int)Math.floor(Math.random()*3);
 			switch(turn)
 				{
@@ -25,9 +27,10 @@ public class SnakeLadder {
 				}
 			
 			if (currentPosition == 100) {
-				System.out.println("Player has reached postion "+currentPosition);
+				System.out.println("Player has reached postion "+currentPosition+" in "+dieRolls+" die rolls");
 				break;
 			}
+			
 		}
 	}
 
