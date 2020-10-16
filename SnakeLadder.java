@@ -26,6 +26,7 @@ public class SnakeLadder {
 							break;
 				}
 			
+			System.out.println("Current position is: "+ currentPosition);
 			if (currentPosition == 100) {
 				System.out.println("Player has reached postion "+currentPosition+" in "+dieRolls+" die rolls");
 				break;
